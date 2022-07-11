@@ -13,9 +13,9 @@ namespace buyMovies.Data.Services
         }
 
 
-        public  async Task AddAsync(Actor actor)
+        public async Task AddAsync(Actor actor)
         {
-           await _context.Actors.AddAsync(actor);
+            await _context.Actors.AddAsync(actor);
             await _context.SaveChangesAsync();
         }
 
@@ -24,14 +24,14 @@ namespace buyMovies.Data.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Actor>> GetAllAsync()
+        public async Task<IEnumerable<Actor>> GetAll()
         {
-            throw new NotImplementedException();
+            var result = await _context.Actors.ToListAsync();
+            return result;
         }
-
         public async Task<Actor> GetByIdAsync(int id)
         {
-            var result =await _context.Actors.FirstOrDefaultAsync(n => n.Id == id);
+            var result = await _context.Actors.FirstOrDefaultAsync(n => n.Id == id);
             return result;
            
         }

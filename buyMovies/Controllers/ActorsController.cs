@@ -16,7 +16,7 @@ namespace buyMovies.Controllers
 
         public async Task<IActionResult>Index()
         {
-            var data = await _service.GetAllAsync();
+            var data = await _service.GetAll();
             return View(data);
         }
         //Get request
@@ -43,8 +43,8 @@ namespace buyMovies.Controllers
         {
             var actorDetails =await _service.GetByIdAsync(id);
             if (actorDetails == null) return View("Empty");
-            return View(actorDetails);
-
+                 return View(actorDetails);
+        
         }
 
 
