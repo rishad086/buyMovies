@@ -14,7 +14,7 @@ namespace buyMovies.Controllers
             _service = service;
         }
 
-        public async Task<IActionResult>Index()
+        public async Task<IActionResult> Index()
         {
             var data = await _service.GetAll();
             return View(data);
@@ -32,21 +32,66 @@ namespace buyMovies.Controllers
             {
                 return View(actor);
             }
-            
-                await _service.AddAsync(actor);
-                return RedirectToAction(nameof(Index));
-            
-            
+
+            await _service.AddAsync(actor);
+            return RedirectToAction(nameof(Index));
+
+
         }
         //Get: Actors/Details/1
         public async Task<IActionResult> Details(int id)
         {
-            var actorDetails =await _service.GetByIdAsync(id);
-            if (actorDetails == null) return View("Empty");
-                 return View(actorDetails);
-        
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not found");
+            return View(actorDetails);
+
         }
 
 
+        //Actors/edit
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not found");
+            return View(actorDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
+        {
+            if (ModelState.IsValid) //ekhane !ModelState.IsValid howar kotha chilo but Shudu ModelState.IsValid dile kaj hocche
+            {
+                return View(actor);
+            }
+
+            await _service.UpdateAsync(id, actor);
+            return RedirectToAction(nameof(Index));
+
+
+        }
+
+
+        //Actors/delete
+        public async Task<IActionResult> Delete(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not found");
+            return View(actorDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteComfirmed(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not found");
+
+            await _service.DeleteAsync(id);
+
+
+          
+            return RedirectToAction(nameof(Index));
+
+
+        }
     }
 }
