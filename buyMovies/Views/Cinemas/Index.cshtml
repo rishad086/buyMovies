@@ -42,11 +42,7 @@
                 </tr>
                 }
             </tbody>
-              <div class="position-relative">
-               <div class="text-white position-absolute top-0 start-0 translate-middle">
-                <a  asp-action="Create" class="btn btn-success"><i  class="bi bi-plus-circle"></i>Add New</a>
-            </div>
-            </div>
+              @await Html.PartialAsync("_CreateItem","Cinemas")
 
         </table>
 

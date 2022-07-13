@@ -5,28 +5,61 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace buyMovies.Models
 {
-    public class Movie:IEntityBase
+    public class NewMovieVM
     {
-        [Key]
         public int Id { get; set; }
+        [Display(Name = "Moive name")]
+        [Required(ErrorMessage ="Name is required")]
+       
+        
         public string Name { get; set; }
+
+
+        [Display(Name = "Moive description")]
+        [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
+
+        [Display(Name = "Price in TK")]
+        [Required(ErrorMessage = "Price is required")]
+       
         public double Price { get; set; }
+
+        [Display(Name = "Moive poster URL")]
+        [Required(ErrorMessage = "Movie poster URL is required")]
+
+
         public string ImageURL { get; set; }
+
+        [Display(Name = "Start date")]
+        [Required(ErrorMessage = "Start date is required")]
         public DateTime StartDate { get; set; }
+
+        [Display(Name = "End date")]
+        [Required(ErrorMessage = "End date is required")]
+
+
         public DateTime EndDate { get; set; }
+
+
+        [Display(Name = "Select a catagory")]
+        [Required(ErrorMessage = "Movie catagory is required")]
         public MovieCategory MovieCategory { get; set; }
         //Relationships
-        public List<Actor_Movie> Actors_Movies { get; set; }
 
-        //Cinema
+        [Display(Name = "Select actor(s)")]
+        [Required(ErrorMessage = "Movie actor(s) is required")]
+        public List<int> ActorIds { get; set; }
+
+        [Display(Name = "Select a Cinema")]
+        [Required(ErrorMessage = "Movie catagory is required")]
+
+
         public int CinemaId { get; set; }
-        [ForeignKey("CinemaId")]
-        public Cinema Cinema { get; set; }
 
-        //Producer
+        [Display(Name = "Select a producer")]
+        [Required(ErrorMessage = "Movie producer is required")]
+
         public int ProducerId { get; set; }
-        [ForeignKey("ProducerId")]
-        public Producer Producer { get; set; }
+       
     }
 }
