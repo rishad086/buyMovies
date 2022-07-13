@@ -21,6 +21,17 @@ namespace buyMovies.Controllers
             return View(allMovies);
         }
 
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allMovies = await _service.GetAll(n => n.Cinema);
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+                return View("Index",filteredResult);
+            }
+            return View("Index", allMovies);
+        }
+
         //Get:movies/details
         public async Task<IActionResult> Details(int id)
         {
