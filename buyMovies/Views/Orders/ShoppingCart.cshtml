@@ -50,11 +50,11 @@
         </table>
         <div class="text-center">
             <div class="btn-group">
-              @*<a class="btn btn-outline-primary"  asp-action="CompleteOrder">
+              <a class="btn btn-outline-primary"  asp-action="CompleteOrder">
                    Complete Order
                 
                     
-               </a>*@ 
+               </a>
                <div id="paypal-btn"></div>
                <span style="padding:5px"></span>
                <a class="btn btn-outline-success" asp-controller="Movies" asp-action="Index">
@@ -108,14 +108,14 @@ paypal.Button.render({
     //pay 
     onAuthorize: function(data, actions) {
         return actions.payment.excute().then(function() {
-            var url = '@Url.Action("CompleteOrder","Orders",new { })';
+            var url = '@Url.Action("OrderCompleted","Orders",new { })';
             window.location.href = url;
         });
     }
 
 
 
-}, '#paypal-btn');
+}, '#paypal-btn')
 
             </script>
 }
